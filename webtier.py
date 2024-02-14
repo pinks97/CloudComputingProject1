@@ -4,6 +4,7 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi import HTTPException
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import PlainTextResponse
 
 app = FastAPI()
 
@@ -44,4 +45,4 @@ async def post_root(inputFile: UploadFile = File(...)):
     if filename not in loaded_data:
         raise HTTPException(status_code=404, detail="File not found in loaded data.")
     prediction_result = loaded_data[filename]
-    return filename + ":" + prediction_result
+    return PlainTextResponse(content=f"{filename}:{prediction_result}")
