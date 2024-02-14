@@ -44,4 +44,4 @@ async def post_root(inputFile: UploadFile = File(...)):
     if filename not in loaded_data:
         raise HTTPException(status_code=404, detail="File not found in loaded data.")
     prediction_result = loaded_data[filename]
-    return f"{filename}:{prediction_result}"
+    return filename + ":" + prediction_result
