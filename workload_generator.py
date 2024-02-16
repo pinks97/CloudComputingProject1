@@ -64,7 +64,6 @@ for i, name in enumerate(os.listdir(image_folder)):
 with ThreadPoolExecutor(max_workers = num_max_workers) as executor:
     executor.map(send_one_request, image_path_list)
 
-print(image_path_list)
 print ("Waiting ... ")
 while True:
     print (".")
