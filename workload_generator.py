@@ -32,11 +32,8 @@ wrong_predictions   = 0
 def send_one_request(image_path):
     global prediction_df, responses, err_responses, correct_predictions, wrong_predictions
     # Define http payload, "myfile" is the key of the http payload
-    print("go inside")
     file = {"inputFile": open(image_path,'rb')}
-    print(f"**** {file}")
     response = requests.post(url, files=file)
-    print(response.status_code)
     # Print error message if failed
     if response.status_code != 200:
         print('sendErr: '+r.url)
@@ -47,7 +44,10 @@ def send_one_request(image_path):
         msg         = image_msg + '\n' + 'Classification result: ' + response.text
         print(msg)
         responses   +=1
+        #print(response.text.split(':')[1])
+        #print("correct result")
         correct_result = prediction_df.loc[prediction_df['Image'] == filename.split('.')[0], 'Results'].iloc[0]
+        print("correct", correct_result)
         if correct_result == response.text.split(':')[1]:
             correct_predictions +=1
         else:
