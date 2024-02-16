@@ -47,7 +47,6 @@ def send_one_request(image_path):
         #print(response.text.split(':')[1])
         #print("correct result")
         correct_result = prediction_df.loc[prediction_df['Image'] == filename.split('.')[0], 'Results'].iloc[0]
-        print("correct", correct_result)
         if correct_result == response.text.split(':')[1]:
             correct_predictions +=1
         else:
